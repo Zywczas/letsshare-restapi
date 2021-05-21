@@ -11,7 +11,7 @@ class StudentController @Autowired constructor(private val service: StudentServi
     @GetMapping(path = ["siema"])
     fun hello() = "siema"
 
-    @GetMapping
+    @GetMapping(path = ["cotam"])
     fun coTam() = listOf("co", "tam?")
 
     @GetMapping(path = ["students"])
