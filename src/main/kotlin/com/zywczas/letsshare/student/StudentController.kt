@@ -1,15 +1,16 @@
 package com.zywczas.letsshare.student
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import kotlin.IllegalStateException
 
-@RestController
-@RequestMapping("api/v1/student")
+//@RestController
+//@RequestMapping("api/v1/student")
 class StudentController @Autowired constructor(private val service: StudentService) {  //@Autowired jest jak @Inject
 
-    @GetMapping(path = ["siema"])
-    fun hello() = "siema"
+//    @GetMapping(path = ["siema"])
+//    fun hello() = Student("Piotr")
 
 //    @GetMapping(path = ["cotam"])
 //    fun coTam() = listOf("co", "tam?")
