@@ -11,5 +11,5 @@ class Application
 
 fun main(args: Array<String>) {
 	runApplication<Application>(*args)
-	println("LOCAL IP ADDRESS: " + InetAddress.getLocalHost().hostAddress)
+//	println("LOCAL IP ADDRESS: " + InetAddress.getLocalHost().hostAddress)
 }
