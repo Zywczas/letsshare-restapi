@@ -1,18 +1,20 @@
 package com.zywczas.letsshare.pushnotifictions
 
-import com.zywczas.letsshare.Hello
+import com.zywczas.letsshare.models.ApiResponse
+import com.zywczas.letsshare.models.ExpenseNotification
 import com.zywczas.letsshare.utils.API_VERSION
-import com.zywczas.letsshare.utils.APP_NAME
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("$API_VERSION/notification")
 class NotificationController {
 
-    @GetMapping(path = ["hello"])
-    fun hello() = ResponseEntity.ok(Hello("$APP_NAME up and running."))
+    @PostMapping(path = ["expense_notification"])
+    fun sendNotification(@RequestBody notification: ExpenseNotification): ResponseEntity<ApiResponse> {
+        println(notification)
+        //todo - moze dac korutyny
+        return ResponseEntity.ok(ApiResponse("Notification accepted."))
+    }
 
 }
