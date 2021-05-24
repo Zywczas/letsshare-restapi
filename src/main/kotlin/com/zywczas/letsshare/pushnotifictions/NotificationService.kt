@@ -17,6 +17,7 @@ class NotificationService @Autowired constructor(private val firestoreRefs: Fire
     private val groupNameKey = "groupName"
 
     fun pushNotification(notification: ExpenseNotification){
+        println("notification otrzymane")
         var count = 1
         val data = mapOf(Pair(ownerNameKey, notification.ownerName), Pair(groupNameKey, notification.groupName))
 
