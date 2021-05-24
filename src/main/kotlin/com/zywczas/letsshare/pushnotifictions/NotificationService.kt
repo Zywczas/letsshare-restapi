@@ -39,6 +39,7 @@ class NotificationService @Autowired constructor(private val firestoreRefs: Fire
                 .build()
 
         val returnMessage = FirebaseMessaging.getInstance().sendAsync(message).get()
+        println(returnMessage)
         println("wyslano wiadomosc nr: $count")
     }
 
