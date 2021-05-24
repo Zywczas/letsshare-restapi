@@ -11,11 +11,9 @@ class FirestoreReferencesImpl : FirestoreReferences {
 
     override val messagingTokenField = "messagingToken"
 
-    override fun userRefs(id: String): DocumentReference{
-        println("userRefs z FirestoreReferencesImpl dziala")
-        return FirestoreClient.getFirestore()
+    override fun userRefs(id: String): DocumentReference =
+            FirestoreClient.getFirestore()
                 .collection(collectionUsers)
                 .document(id)
-    }
 
 }

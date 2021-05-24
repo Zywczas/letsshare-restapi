@@ -13,21 +13,24 @@ import java.util.concurrent.TimeUnit
 @Service
 class NotificationService @Autowired constructor(private val firestoreRefs: FirestoreReferences) {
 
-    private val messageContentKey = "content"
+    private val ownerNameKey = "ownerName"
+    private val groupNameKey = "groupName"
 
     fun pushNotification(notification: ExpenseNotification){
-        val message = "${notification.ownerName} has added new expense to ${notification.groupName}"
-        val data = mapOf(Pair(messageContentKey, message))
+        var count = 1
+        val data = mapOf(Pair(ownerNameKey, notification.ownerName), Pair(groupNameKey, notification.groupName))
 
         notification.receiversIds.forEach { id ->
             val user = firestoreRefs.userRefs(id).get()[10L, TimeUnit.SECONDS].toObject(User::class.java)
             if (user?.messagingToken != null){
-                sendNotification(user.messagingToken, data)
+                sendNotification(count, user.messagingToken, data)
+                println("do uzytkownika: ${user.name}")
             }
+            count ++
         }
     }
 
-    private fun sendNotification(token: String, data: Map<String, String>){
+    private fun sendNotification(count: Int, token: String, data: Map<String, String>){
         val androidConfig = AndroidConfig.builder().putAllData(data).build()
         val message = Message.builder()
                 .setToken(token)
@@ -35,7 +38,7 @@ class NotificationService @Autowired constructor(private val firestoreRefs: Fire
                 .build()
 
         val returnMessage = FirebaseMessaging.getInstance().sendAsync(message).get()
-        print(returnMessage)
+        println("wyslano wiadomosc nr: $count")
     }
 
 }
