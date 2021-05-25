@@ -32,7 +32,10 @@ class NotificationService @Autowired constructor(private val firestoreRefs: Fire
     }
 
     private fun sendNotification(count: Int, token: String, data: Map<String, String>){
-        val androidConfig = AndroidConfig.builder().putAllData(data).build()
+        val androidConfig = AndroidConfig.builder()
+                .setPriority(AndroidConfig.Priority.HIGH)
+                .putAllData(data)
+                .build()
         val message = Message.builder()
                 .setToken(token)
                 .setAndroidConfig(androidConfig)
